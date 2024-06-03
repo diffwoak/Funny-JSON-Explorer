@@ -11,6 +11,7 @@ class Container:
         if isinstance(json_object, dict):
             # 需要记录当前节点是该level中的开始/中间/结尾节点
             for count, (key, value) in enumerate(json_object.items()):
+                # 根据索引判断节点位置
                 if count == len(json_object)-1:
                     state = "end"
                 elif count == 0:
@@ -36,6 +37,9 @@ class Container:
     def draw(self):
         pass
 
+# 以下是继承Contianer不同类对象,Container父类统一实现了节点的生成,子类只需根据Container类型实现不同的draw函数
+
+# 树形结构Container类
 class TreeContainer(Container): 
     def draw(self):
         in_level = [0] * (self.max_level+1)
@@ -63,6 +67,7 @@ class TreeContainer(Container):
                     in_level[level] = 0
             print(leaf.draw(),end="")
 
+# 矩形结构Container类
 class RectangleContainer(Container):
     def draw(self):
         width = 43
